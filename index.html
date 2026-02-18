@@ -362,28 +362,41 @@ nav{
 .wcard p{font-size:.8rem;line-height:1.72;color:rgba(250,246,236,.42);font-weight:300;}
 
 /* ════════════════════════════════════
-   CTA BAND — white, black & gold
+   CTA BAND — light bg, dark text
+   (dark backgrounds use light text elsewhere)
 ════════════════════════════════════ */
 .cta-band{
   position:relative;overflow:hidden;
   padding:80px 6%;text-align:center;
-  background:#fff;
+  background:#FAF6EC;
 }
 .cta-bg{
   position:absolute;inset:0;
-  background:linear-gradient(135deg, #fff 0%, #FAF6EC 50%, #fff 100%);
-  opacity:.97;
+  background:
+    radial-gradient(circle at top left, rgba(200,169,81,.14), transparent 55%),
+    radial-gradient(circle at bottom right, rgba(200,169,81,.18), transparent 55%),
+    #FAF6EC;
+  opacity:1;
 }
-.cta-in{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1.1rem;}
+.cta-in{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;gap:1.1rem;
+  color:#160D01;
+}
 .cta-ghost{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(4.5rem,22vw,14rem);
   line-height:.82;letter-spacing:.02em;
-  -webkit-text-stroke:1px rgba(0,0,0,.06);
+  -webkit-text-stroke:1px rgba(0,0,0,.08);
   color:transparent;user-select:none;pointer-events:none;
   margin-bottom:-.5rem;
 }
-.cta-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1rem,4vw,1.6rem);color:#0C0800;}
+.cta-sub{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;
+  font-size:clamp(1rem,4vw,1.6rem);
+  color:#160D01;
+}
 .cta-ph{
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(2.5rem,9vw,5.5rem);
@@ -391,7 +404,133 @@ nav{
   transition:color .3s;
 }
 .cta-ph:hover{color:var(--g);}
-.cta-loc{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(12,8,0,.5);}
+.cta-loc{
+  font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(0,0,0,.6);
+}
+.cta-form{
+  margin-top:2rem;
+  width:100%;
+  max-width:720px;
+  display:grid;
+  gap:1.1rem;
+  padding:1.8rem 1.6rem 1.6rem;
+  border-radius:14px;
+  background:rgba(255,255,255,.9);
+  box-shadow:0 18px 45px rgba(0,0,0,.18);
+  border:1px solid rgba(200,169,81,.25);
+}
+.cta-form-row{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+}
+.cta-form-row label{
+  font-size:.7rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(0,0,0,.7);
+  margin-bottom:.35rem;
+}
+.cta-form-row input,
+.cta-form-row textarea{
+  padding:.7rem .8rem;
+  border-radius:4px;
+  border:1px solid rgba(0,0,0,.16);
+  background:#fff;
+  color:#160D01;
+  font-family:'DM Sans',sans-serif;
+  font-size:.85rem;
+}
+.cta-form-row textarea{resize:vertical;min-height:120px;}
+.cta-form-row input::placeholder,
+.cta-form-row textarea::placeholder{color:rgba(0,0,0,.45);}
+.cta-form-row input:focus,
+.cta-form-row textarea:focus{
+  outline:none;
+  border-color:var(--g);
+  box-shadow:0 0 0 1px rgba(200,169,81,.35);
+}
+.cta-form button.btn-g{
+  margin-top:.4rem;
+}
+
+/* Services dropdown (multi-select) */
+.cta-services-dropdown{
+  position:relative;
+}
+.cta-services-toggle{
+  width:100%;
+  padding:.7rem .8rem;
+  border-radius:4px;
+  border:1px solid rgba(0,0,0,.16);
+  background:#fff;
+  color:#160D01;
+  font-family:'DM Sans',sans-serif;
+  font-size:.85rem;
+  text-align:left;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  cursor:pointer;
+}
+.cta-services-toggle::after{
+  content:'▾';
+  font-size:.7rem;
+  opacity:.7;
+}
+.cta-services-dropdown.open .cta-services-toggle{
+  border-color:var(--g);
+  box-shadow:0 0 0 1px rgba(200,169,81,.35);
+}
+.cta-services-menu{
+  position:absolute;
+  left:0;
+  right:0;
+  top:100%;
+  margin-top:.25rem;
+  background:#fff;
+  border-radius:6px;
+  border:1px solid rgba(0,0,0,.12);
+  box-shadow:0 16px 35px rgba(0,0,0,.18);
+  padding:.45rem 0;
+  max-height:220px;
+  overflow:auto;
+  z-index:5;
+  display:none;
+}
+.cta-services-dropdown.open .cta-services-menu{
+  display:block;
+}
+.cta-services-menu label{
+  display:flex;
+  align-items:center;
+  gap:.55rem;
+  padding:.45rem .8rem;
+  font-size:.85rem;
+  cursor:pointer;
+}
+.cta-services-menu label:hover{
+  background:rgba(0,0,0,.04);
+}
+.cta-services-menu input[type="checkbox"]{
+  accent-color:var(--g);
+}
+
+@media(min-width:768px){
+  .cta-form{
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    column-gap:1.4rem;
+    row-gap:1rem;
+  }
+  .cta-form-row--full{
+    grid-column:1 / -1;
+  }
+  .cta-form button.btn-g{
+    grid-column:1 / -1;
+    justify-self:flex-end;
+  }
+}
 
 /* ════════════════════════════════════
    FOOTER
@@ -404,16 +543,17 @@ footer{
 }
 .ft{padding:3.5rem 6%;display:flex;flex-direction:column;gap:2.5rem;max-width:1280px;margin:0 auto;}
 .fl{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:.06em;color:var(--g);}
-.ft-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(250,246,236,.28);margin-top:.2rem;}
-.ft-desc{font-size:.8rem;line-height:1.8;color:rgba(250,246,236,.28);margin-top:1rem;}
+.ft-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:.9rem;color:rgba(250,246,236,.7);margin-top:.2rem;}
+.ft-desc{font-size:.8rem;line-height:1.8;color:rgba(250,246,236,.8);margin-top:1rem;}
 .ft-h{font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:.2em;color:var(--gd);margin-bottom:1rem;}
 .ft-ul{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
-.ft-ul a{font-size:.8rem;font-weight:300;color:rgba(250,246,236,.33);text-decoration:none;transition:color .3s;}
+.ft-ul a{font-size:.8rem;font-weight:300;color:#FAF6EC;text-decoration:none;transition:color .3s;}
 .ft-ul a:hover{color:var(--gl);}
 .ft-c{display:flex;flex-direction:column;gap:.55rem;}
-.ft-ci{font-size:.8rem;font-weight:300;color:rgba(250,246,236,.33);}
-.ft-ci a{color:var(--g);text-decoration:none;}
-.fb{border-top:1px solid rgba(200,169,81,.07);padding:1.1rem 6%;max-width:1280px;margin:0 auto;font-size:.65rem;color:rgba(250,246,236,.18);display:flex;flex-direction:column;gap:.3rem;}
+.ft-ci{font-size:.8rem;font-weight:300;color:#FAF6EC;}
+.ft-ci a{color:#FAF6EC;text-decoration:none;}
+.ft-ci a:hover{color:var(--gl);}
+.fb{border-top:1px solid rgba(200,169,81,.07);padding:1.1rem 6%;max-width:1280px;margin:0 auto;font-size:.65rem;color:rgba(250,246,236,.7);display:flex;flex-direction:column;gap:.3rem;}
 
 /* ════════════════════════════════════
    REVEAL
@@ -737,6 +877,40 @@ footer{
     <a class="cta-ph" href="tel:2037801036">(203) 780-1036</a>
     <p class="cta-loc">📍 Serving All of Connecticut</p>
     <a href="tel:2037801036" class="btn-g" style="display:inline-block;"><span>Get Your Free Estimate</span></a>
+    <form class="cta-form" action="contact.php" method="post" novalidate>
+      <div class="cta-form-row">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your full name" required>
+      </div>
+      <div class="cta-form-row">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="Best number to reach you" required>
+      </div>
+      <div class="cta-form-row">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+      </div>
+      <div class="cta-form-row cta-form-row--full">
+        <label>Service wanted (you can select multiple)</label>
+        <div class="cta-services-dropdown" data-default-label="Select services">
+          <button type="button" class="cta-services-toggle">Select services</button>
+          <div class="cta-services-menu">
+            <label><input type="checkbox" name="services[]" value="Patios"><span>Patios</span></label>
+            <label><input type="checkbox" name="services[]" value="Walkways"><span>Walkways</span></label>
+            <label><input type="checkbox" name="services[]" value="Fireplaces &amp; Firepits"><span>Fireplaces &amp; Firepits</span></label>
+            <label><input type="checkbox" name="services[]" value="Retaining Walls"><span>Retaining Walls</span></label>
+            <label><input type="checkbox" name="services[]" value="Stonework &amp; Brickwork"><span>Stonework &amp; Brickwork</span></label>
+            <label><input type="checkbox" name="services[]" value="Concrete &amp; Foundations"><span>Concrete &amp; Foundations</span></label>
+            <label><input type="checkbox" name="services[]" value="Repairs &amp; Restorations"><span>Repairs &amp; Restorations</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="cta-form-row cta-form-row--full">
+        <label for="message">Description</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us about your project" required></textarea>
+      </div>
+      <button type="submit" class="btn-g"><span>Submit Request</span></button>
+    </form>
   </div>
 </div>
 
@@ -746,7 +920,7 @@ footer{
     <div>
       <div class="fl">Mission Masonry LLC</div>
       <div class="ft-tag">Reliable. Precise. Built to Last.</div>
-      <p class="ft-desc">Connecticut's trusted masonry contractor delivering superior craftsmanship for patios, fireplaces, walkways, and all masonry needs.</p>
+      <p class="ft-desc" style="color: white;">Connecticut's trusted masonry contractor delivering superior craftsmanship for patios, fireplaces, walkways, and all masonry needs.</p>
     </div>
     <div>
       <p class="ft-h">Navigate</p>
@@ -829,6 +1003,33 @@ gs.addEventListener('mousemove',e=>{if(!drag)return;e.preventDefault();gs.scroll
 function openLb(el){document.getElementById('lbImg').src=el.querySelector('img').src;document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden';}
 function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
+
+/* Services dropdown behaviour */
+document.querySelectorAll('.cta-services-dropdown').forEach(drop=>{
+  const toggle=drop.querySelector('.cta-services-toggle');
+  const menu=drop.querySelector('.cta-services-menu');
+  const checkboxes=menu.querySelectorAll('input[type=\"checkbox\"]');
+  const defaultLabel=drop.dataset.defaultLabel||'Select services';
+
+  function updateLabel(){
+    const selected=[...checkboxes].filter(c=>c.checked).map(c=>c.nextElementSibling.textContent.trim());
+    toggle.textContent=selected.length?selected.join(', '):defaultLabel;
+  }
+
+  toggle.addEventListener('click',()=>{
+    drop.classList.toggle('open');
+  });
+
+  checkboxes.forEach(cb=>{
+    cb.addEventListener('change',updateLabel);
+  });
+
+  document.addEventListener('click',e=>{
+    if(!drop.contains(e.target)) drop.classList.remove('open');
+  });
+
+  updateLabel();
+});
 </script>
 </body>
 </html>
